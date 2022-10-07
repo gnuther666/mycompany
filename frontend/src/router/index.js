@@ -1,15 +1,22 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import HelloWorld from '@/components/HelloWorld'
+import titlebar from '@/components/titlebar'
+import taskSquare from '@/components/taskSquare'
 
 Vue.use(Router)
+const routes = [
+  {
+    path: '/',
+    component: titlebar,
+    children: [
+      {
+        path: 'taskSquare',
+        component: taskSquare
+      }
+    ]
+  }
+]
 
-export default new Router({
-  routes: [
-    {
-      path: '/',
-      name: 'HelloWorld',
-      component: HelloWorld
-    }
-  ]
-})
+const router = new Router(routes)
+
+export default router
