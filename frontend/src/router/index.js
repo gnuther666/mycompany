@@ -12,11 +12,19 @@ const routes = [
       {
         path: 'taskSquare',
         component: taskSquare
+      },
+      {
+        path: '*',
+        component: taskSquare
       }
     ]
   }
 ]
 
-const router = new Router(routes)
+const router = new Router({
+  routes,
+  base: '/',
+  mode: 'hash'
+})
 
 export default router

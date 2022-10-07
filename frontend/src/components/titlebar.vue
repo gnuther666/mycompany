@@ -1,7 +1,7 @@
 <template>
   <div class="titlebar">
     标题行
-    <router-view/>
+    <router-view></router-view>
   </div>
 </template>
 

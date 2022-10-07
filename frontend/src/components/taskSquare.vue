@@ -1,6 +1,7 @@
 <template>
-  <div>
+  <div class="taskSquare">
     任务广场
+    <router-view></router-view>
   </div>
 </template>
 

@@ -13,7 +13,7 @@ services:
     build: ./frontend_dev
     ports:
       - 8011:22
-      - 8002:8000
+      - 8002:8002
     volumes:
       - E:\workspace\mycompany\frontend:/app
     environment:
