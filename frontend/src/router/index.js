@@ -11,11 +11,13 @@ const routes = [
     children: [
       {
         path: 'taskSquare',
-        component: taskSquare
+        component: taskSquare,
+        name: 'taskSquare'
       },
       {
         path: '*',
-        component: taskSquare
+        component: taskSquare,
+        name: 'taskSquare'
       }
     ]
   }
