@@ -9,6 +9,9 @@ services:
       - E:\workspace\mycompany\backend:/app
     environment:
       - TZ=Asia/Shanghai
+    networks:
+      hx_net:
+        ipv4_address: 172.0.0.2
   frontend:
     build: ./frontend_dev
     ports:
@@ -18,3 +21,31 @@ services:
       - E:\workspace\mycompany\frontend:/app
     environment:
       - TZ=Asia/Shanghai
+    networks:
+      hx_net:
+        ipv4_address: 172.0.0.3
+  db:
+    image: postgres
+    restart: always
+    volumes:
+      - E:\workspace\mycompany\dbdata:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=admin
+    networks:
+      hx_net:
+        ipv4_address: 172.0.0.4
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8050:8080
+    networks:
+      hx_net:
+        ipv4_address: 172.0.0.5
+networks:
+  hx_net:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.0.0.0/16

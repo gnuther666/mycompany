@@ -1,4 +1,4 @@
-FROM python:3.9.14
+FROM postgres:15.0
 RUN  sed -i s@/archive.ubuntu.com/@/mirrors.aliyun.com/@g /etc/apt/sources.list
 RUN  sed -i s@/deb.debian.org/@/mirrors.aliyun.com/@g /etc/apt/sources.list
 RUN  sed -i s@/security.ubuntu.com/@/mirrors.aliyun.com/@g /etc/apt/sources.list
@@ -13,10 +13,4 @@ RUN sed 's@session\s*required\s*pam_loginuid.so@session optional pam_loginuid.so
 ENV NOTVISIBLE "in users profile"
 RUN echo "export VISIBLE=now" >> /etc/profile
 
-RUN mkdir /app
-ADD test.py /app/test.py
-WORKDIR /app
-COPY requirements.txt ./
-RUN pip install -r requirements.txt -i https://pypi.tuna.tsinghua.edu.cn/simple
-CMD python3 /app/test.py
 CMD ["/usr/sbin/sshd", "-D"]
