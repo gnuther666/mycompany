@@ -1,0 +1,1 @@
+cd XXX & npm install

@@ -12,13 +12,13 @@ RUN echo "permitRootLogin yes" >> /etc/ssh/sshd_config
 RUN sed 's@session\s*required\s*pam_loginuid.so@session optional pam_loginuid.so@g' -i /etc/pam.d/sshd
 ENV NOTVISIBLE "in users profile"
 RUN echo "export VISIBLE=now" >> /etc/profile
-
-ENV NPM_CONFIG_LOGLEVEL info
-RUN npm install -g cnpm --registry=https://registry.npm.taobao.org
-RUN npm install vue -g
-RUN npm install vue-cli -g
-RUN cnpm install webpack
 RUN mkdir /app
 WORKDIR /app
-CMD top
+ENV NPM_CONFIG_LOGLEVEL info
+RUN cnpm install -g cnpm --registry=https://registry.npm.taobao.org
+RUN cnpm install vue -g
+RUN cnpm install vue-cli -g
+RUN cnpm install qs -g
+RUN npm install --save axios
+RUN cnpm install webpack
 CMD ["/usr/sbin/sshd", "-D"]

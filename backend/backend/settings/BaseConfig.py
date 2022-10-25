@@ -25,8 +25,8 @@ SECRET_KEY = 'o0%&=cwptei6njacuvnvt#fvuc*r#58=y7(l4pbf_4n8p7im+3'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-
-ALLOWED_HOSTS = []
+# TODO: 跨站还是没解决，稍后解决
+ALLOWED_HOSTS = ['127.0.0.1']
 
 
 # Application definition
@@ -70,9 +70,9 @@ TEMPLATES = [
     },
 ]
 
-REST_FRAMEWORK = {
-    'EXCEPTION_HANDLER': 'backend.backend.unit.exceptions.custom_exception_handler'
-}
+# REST_FRAMEWORK = {
+#     'EXCEPTION_HANDLER': 'backend.backend.unit.exceptions.custom_exception_handler'
+# }
 WSGI_APPLICATION = 'backend.wsgi.application'
 
 
@@ -113,9 +113,9 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/2.2/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'zh-Hans'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Shanghai'
 
 USE_I18N = True
 

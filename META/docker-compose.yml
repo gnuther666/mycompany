@@ -12,18 +12,18 @@ services:
     networks:
       hx_net:
         ipv4_address: 172.0.0.2
-  frontend:
-    build: ./frontend_dev
-    ports:
-      - 8011:22
-      - 8002:8002
-    volumes:
-      - E:\workspace\mycompany\frontend:/app
-    environment:
-      - TZ=Asia/Shanghai
-    networks:
-      hx_net:
-        ipv4_address: 172.0.0.3
+  #frontend: 前端远程延迟大，以后只做发布，不做开发
+  #  build: ./frontend_dev
+  #  ports:
+  #    - 8011:22
+  #    - 8002:8002
+  #  volumes:
+  #    - E:\workspace\mycompany\frontend:/app
+  #  environment:
+  #    - TZ=Asia/Shanghai
+  #  networks:
+  #    hx_net:
+  #      ipv4_address: 172.0.0.3
   db:
     image: postgres
     restart: always
