@@ -1,0 +1,14 @@
+DefaultDB:
+  ENGINE: django.db.backends.postgresql_psycopg2
+  NAME: company1
+  USER: admin
+  PASSWORD: admin
+  HOST: 172.0.0.4
+  PORT: '5432'
+SysConfig:
+  ServerAddr: 172.0.0.2
+  ServerPort: '8000'
+  AllowHost:
+    - 127.0.0.1
+    - 172.0.0.2
+    - localhost

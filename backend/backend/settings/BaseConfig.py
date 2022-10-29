@@ -12,6 +12,9 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 
 import os
 from backend.settings.MLog import getlogger
+from unit.ReadConfig import ReadConfig
+
+config_obj = ReadConfig()
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -26,12 +29,13 @@ SECRET_KEY = 'o0%&=cwptei6njacuvnvt#fvuc*r#58=y7(l4pbf_4n8p7im+3'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 # TODO: 跨站还是没解决，稍后解决
-ALLOWED_HOSTS = ['127.0.0.1']
 
+ALLOWED_HOSTS = config_obj.get_run_server_config()['AllowHost']
 
 # Application definition
 
 INSTALLED_APPS = [
+    'corsheaders',  # 新增跨域
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -43,13 +47,16 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    'backend.MiddleWares.FrontCheck.BeforePrint',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
+
+    # 'django.middleware.csrf.CsrfViewMiddleware',  # 跨域原本就有
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
-    'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.middleware.clickjacking.XFrameOptionsMiddleware'
 ]
 
 ROOT_URLCONF = 'backend.urls'
@@ -70,9 +77,6 @@ TEMPLATES = [
     },
 ]
 
-# REST_FRAMEWORK = {
-#     'EXCEPTION_HANDLER': 'backend.backend.unit.exceptions.custom_exception_handler'
-# }
 WSGI_APPLICATION = 'backend.wsgi.application'
 
 
@@ -80,14 +84,7 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'company1',
-        'USER': 'admin',
-        'PASSWORD': 'admin',
-        'HOST': '172.0.0.4',
-        'PORT': '5432'
-    }
+    'default': config_obj.get_db_config()
 }
 
 LOGGING = getlogger(BASE_DIR)
@@ -128,3 +125,35 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
+
+REST_FRAMEWORK = {
+    'EXCEPTION_HANDLER': 'backend.backend.unit.exceptions.custom_exception_handler',
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
+    ]
+}
+
+CORS_ALLOW_CREDENTIALS = True
+CORS_ORIGIN_ALLOW_ALL = True
+# CORS_ORIGIN_WHITELIST = (
+#     # 这里添加你允许的跨域来源
+#     'http://127.0.0.1',
+#     'http://localhost',
+#     'http://172.24.16.1',
+#     'http://172.28.128.1',
+#     'http://192.168.1.207'
+# )
+#
+# # 添加运行的请求方法
+# CORS_ALLOW_METHODS = (
+#     'DELETE',
+#     'GET',
+#     'OPTIONS',
+#     'PATCH',
+#     'POST',
+#     'PUT',
+#     'VIEW',
+# )
+
+# 添加允许的请求头
+CORS_ALLOW_HEADERS = ('*')

@@ -15,7 +15,7 @@ RUN echo "export VISIBLE=now" >> /etc/profile
 RUN mkdir /app
 WORKDIR /app
 ENV NPM_CONFIG_LOGLEVEL info
-RUN cnpm install -g cnpm --registry=https://registry.npm.taobao.org
+RUN npm install -g cnpm --registry=https://registry.npm.taobao.org
 RUN cnpm install vue -g
 RUN cnpm install vue-cli -g
 RUN cnpm install qs -g

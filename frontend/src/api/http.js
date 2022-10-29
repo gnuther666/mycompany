@@ -3,7 +3,9 @@ import qs from 'qs'
 
 axios.defaults.timeout = 5000 // 响应时间
 axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencodedcharset=UTF-8' // 配置请求头
-axios.defaults.baseURL = 'http://localhost:8000/api' // 配置接口地址
+axios.defaults.baseURL = 'http://localhost:8011/api' // 配置接口地址
+axios.defaults.headers.get['Content-Type'] = 'text/plain'
+axios.defaults.headers.get['Access-Control-Allow-Origin'] = '*'
 
 // POST传参序列化(添加请求拦截器)
 axios.interceptors.request.use((config) => {
@@ -47,6 +49,7 @@ export function fetchPost (url, params) {
 // 返回一个Promise(发送get请求)
 export function fetchGet (url, param) {
   return new Promise((resolve, reject) => {
+    console.log('准备get')
     axios.get(url, {params: param})
       .then(response => {
         resolve(response)

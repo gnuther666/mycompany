@@ -2,8 +2,8 @@
 """Django's command-line utility for administrative tasks."""
 import os
 import sys
-
-
+from django.core.management.commands.runserver import Command
+from unit.ReadConfig import ReadConfig
 def main():
     os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'backend.settings.BaseConfig')
     try:
@@ -18,4 +18,7 @@ def main():
 
 
 if __name__ == '__main__':
+    cfg_obj = ReadConfig()
+    Command.default_addr = cfg_obj.get_run_server_config()['ServerAddr']
+    Command.default_port = cfg_obj.get_run_server_config()['ServerPort']
     main()

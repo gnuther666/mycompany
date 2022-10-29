@@ -35,7 +35,7 @@ def getlogger(basepath):
                 'filters': ['require_debug_true'],
                 'class': 'logging.FileHandler',
                 # 'filename': '/app/logs/a.log',
-                'filename': os.path.join(os.path.dirname(basepath), os.path.join('/app/logs/' + datetime.datetime.now().strftime('%Y%m%d.log'))),
+                'filename': os.path.join(os.path.dirname(basepath), 'logs', datetime.datetime.now().strftime('%Y%m%d.log')),
                 # 'maxBytes': 300 * 1024 * 1024, # 每个文件300M # TODO: 待解决这里参数加不上的问题
                 # 'backupCount': 10, #, 最多保存10个文件
                 'formatter': 'verbose'
