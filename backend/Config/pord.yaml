@@ -12,3 +12,4 @@ SysConfig:
     - 127.0.0.1
     - 172.0.0.2
     - localhost
+  AppendSlash: False

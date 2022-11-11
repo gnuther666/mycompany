@@ -11,3 +11,4 @@ SysConfig:
   AllowHost:
     - 127.0.0.1
     - localhost
+  AppendSlash: True

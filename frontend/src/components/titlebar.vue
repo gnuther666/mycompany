@@ -12,6 +12,10 @@
           active-text-color="#ffd04b">
           <el-menu-item index="1"><img class="weblogo" src="../assets/weblogo.png"></el-menu-item>
           <el-menu-item index="taskSquare">任务广场</el-menu-item>
+          <el-submenu index="2">
+            <template slot="title">系统管理</template>
+            <el-menu-item index="usermanage">用户管理</el-menu-item>
+          </el-submenu>
         </el-menu>
       </el-header>
       <el-main>
@@ -31,7 +35,13 @@ export default {
   },
   methods: {
     handleSelect (key, keypath) {
-      console.log(key, keypath)
+      if (key === 'usermanage') {
+        console.log('进入用户管理')
+        this.$router.push({name: 'UserManager'})
+      } else {
+        console.log('key', key)
+        console.log('keypath', keypath)
+      }
     }
   }
 }

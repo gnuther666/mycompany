@@ -1,4 +1,6 @@
 from django.db import models
+from django.contrib.auth.models import AbstractUser
+
 
 class TaskUserTypeModel(models.Model):
     id = models.AutoField(primary_key=True)
@@ -11,6 +13,18 @@ class TaskUserTypeModel(models.Model):
     class Meta:
         ordering = ['id']
         db_table = 'TaskUserType'
+
+
+class User(AbstractUser):
+    phone = models.CharField(verbose_name='手机号码', max_length=11, null=True, unique=True)
+
+    class Meta(AbstractUser.Meta):
+        swappable = 'AUTH_USER_MODEL'
+
+
+# class MyUser(AbstractUser):
+#     phone = models.CharField(verbose_name='手机号码', max_length=11, null=True, unique=True)
+
 
 class MenuConfigModel(models.Model):
     id = models.AutoField(primary_key=True)
