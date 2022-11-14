@@ -7,7 +7,9 @@ from django.contrib.auth.models import User
 from unit.CommonRequest import PageQuery
 from django.core.exceptions import BadRequest
 from django.forms.models import model_to_dict
+import logging
 
+logger = logging.getLogger('company1')
 
 class TaskUserTypeSet(viewsets.ModelViewSet):
     queryset = TaskUserTypeModel.objects.all()
@@ -24,10 +26,13 @@ class UserSet(viewsets.ModelViewSet):
                        'user_permissions']
     @action(methods=['get'], detail=False, url_path='user_list')
     def user_list(self, request, *args, **kwargs):
+        print('888')
+        logger.info('userlist 被调用')
         response = self.list(request, *args, **kwargs)
         obj = PageQuery(request=request)
         obj.set_field_filter(['id', 'username'])
         data = obj.get_data(response.data)
+
         return Response(data=data)
 
     @action(methods=['get'], detail=False, url_path='user_detil')

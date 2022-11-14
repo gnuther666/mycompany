@@ -1,7 +1,7 @@
 DefaultDB:
-  ENGINE: django.db.backends.postgresql_psycopg2
+  ENGINE: django.db.backends.mysql
   NAME: company1
-  USER: admin
+  USER: root
   PASSWORD: admin
   HOST: 127.0.0.1
   PORT: '8043'
